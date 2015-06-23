@@ -66,6 +66,10 @@
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="AIzaSyA0SaWBLW5ffO6KmpLokPtSSs3l4DnbuLQ" />
+
+        <activity
+            android:name="android.support.v7.widget.TestActivity"
+            android:label="RecyclerViewTestActivity" />
     </application>
 
 </manifest>

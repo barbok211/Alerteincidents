@@ -6,50 +6,62 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="fr.epsi.alerteincidents.PreferencesActivity" >
+    tools:context="fr.epsi.alerteincidents.PreferencesActivity">
 
-    <!-- CheckBox -->
-    <CheckBox
-        android:id="@+id/checkBoxAccident"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Accidents" />
-    
-    <CheckBox
-        android:id="@+id/checkBoxTravaux"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Travaux" 
-        android:layout_below="@+id/checkBoxAccident"/>
-    
-    <CheckBox
-        android:id="@+id/checkBoxCatastrophe"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/checkBoxTravaux"
-        android:layout_below="@+id/checkBoxTravaux"
-        android:text="Catastrophes naturelles" />    
-	
-	<!-- Button -->
-    <Button
-        android:id="@+id/buttonEnregistrer"
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/checkBoxCatastrophe"
-        android:layout_below="@+id/checkBoxCatastrophe"
-        android:layout_marginTop="30dp"
-        android:text="Enregistrer" 
-        android:onClick="registerPreference"/>
 
-    <Button
-        android:id="@+id/buttonAnnuler"
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
+
+    <LinearLayout
+        android:id="@+id/linearLayout4"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/buttonEnregistrer"
-        android:layout_alignBottom="@+id/buttonEnregistrer"
-        android:layout_toRightOf="@+id/buttonEnregistrer"
-        android:text="Annuler" 
-        android:onClick="cancelPreference"/>    
+        android:layout_alignParentLeft="false"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="false"
+        android:orientation="vertical"
+        android:weightSum="1">
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:gravity="center"
+            android:text="@string/title_activity_preferences"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/linearLayout4"
+        android:layout_marginTop="45dp"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/RecyclerViewTypesIncidents"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:gravity="center"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:id="@+id/TypesIncidents_nomType"/>
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/TypesIncidents_boxType" />
+
+        </android.support.v7.widget.RecyclerView>
+
+    </LinearLayout>
+
 </RelativeLayout>

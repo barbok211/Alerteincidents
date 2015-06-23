@@ -106,6 +106,7 @@
     <orderEntry type="library" exported="" name="play-services-fitness-7.0.0" level="project" />
     <orderEntry type="library" exported="" name="support-v4-22.0.0" level="project" />
     <orderEntry type="library" exported="" name="play-services-analytics-7.0.0" level="project" />
+    <orderEntry type="library" exported="" name="recyclerview-v7-21.0.3" level="project" />
     <orderEntry type="library" exported="" name="play-services-appstate-7.0.0" level="project" />
     <orderEntry type="library" exported="" name="play-services-identity-7.0.0" level="project" />
     <orderEntry type="library" exported="" name="play-services-games-7.0.0" level="project" />

@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -23,51 +25,13 @@ public class PreferencesActivity extends Activity {
 		setContentView(R.layout.activity_preferences);
         //change le titre de l'activite
         setTitle("Préférences");
-		
-		//recupere les checkboxs par l'id
-		CheckBox cb1,cb2,cb3;
-		cb1 = (CheckBox) findViewById(R.id.checkBoxAccident);
-		cb2 = (CheckBox) findViewById(R.id.checkBoxTravaux);
-		cb3 = (CheckBox) findViewById(R.id.checkBoxCatastrophe);
-		
+
+        RecyclerView rv = (RecyclerView)findViewById(R.id.RecyclerViewTypesIncidents);
+        rv.setHasFixedSize(true);
+        LinearLayoutManager llm = new LinearLayoutManager(PreferencesActivity.this);
+        rv.setLayoutManager(llm);
 	}
-	
-	//Call when click on buttonEnregistrer
-	public void registerPreference(){
-		Button btnEnregistrer = (Button) this.findViewById(R.id.buttonEnregistrer);
-		
-		btnEnregistrer.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				updatePref();
-			}
-		});
-	}
-	
-	//Call when click on buttonAnnuler
-	public void cancelPreference(){
-		Button btnAnnuler = (Button) this.findViewById(R.id.buttonAnnuler);
-		
-		btnAnnuler.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				cancelUpdate();
-			}
-		});
-		
-	}
-	
-	public void cancelUpdate(){
-	}
-	
-	public void updatePref(){
-		
-	}
-	
+
 	//gestion bouton retour
 	public void onBackPressed(){
 		//recupere le nom de l'activite precedente

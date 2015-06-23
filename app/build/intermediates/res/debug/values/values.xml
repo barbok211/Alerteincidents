@@ -244,7 +244,7 @@ available. Please contact the developer for assistance.</string>
     <string name="title_activity_carte">Carte</string>
     <string name="title_activity_historique">Historique</string>
     <string name="title_activity_incident">Signaler un incident</string>
-    <string name="title_activity_preferences">Preferences</string>
+    <string name="title_activity_preferences">Préférences</string>
     <string name="title_activity_profil">Profil</string>
     <string name="titreIncident">Entrez un titre d\'incident</string>
     <!-- From: file:/C:/Users/Phantom/git/AlerteIncidents/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-wallet/7.0.0/res/values/wallet_strings.xml -->

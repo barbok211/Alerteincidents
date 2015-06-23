@@ -9,48 +9,29 @@
     tools:context="fr.epsi.alerteincidents.PreferencesActivity" >
 
     <!-- CheckBox -->
-    <CheckBox
-        android:id="@+id/checkBoxAccident"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Accidents" />
-    
-    <CheckBox
-        android:id="@+id/checkBoxTravaux"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Travaux" 
-        android:layout_below="@+id/checkBoxAccident"/>
-    
-    <CheckBox
-        android:id="@+id/checkBoxCatastrophe"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/checkBoxTravaux"
-        android:layout_below="@+id/checkBoxTravaux"
-        android:text="Catastrophes naturelles" />    
-	
-	<!-- Button -->
-    <Button
-        android:id="@+id/buttonEnregistrer"
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/checkBoxCatastrophe"
-        android:layout_below="@+id/checkBoxCatastrophe"
-        android:layout_marginTop="30dp"
-        android:text="Enregistrer" 
-        android:onClick="registerPreference"/>
 
-    <Button
-        android:id="@+id/buttonAnnuler"
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
+    <!-- Button -->
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/buttonEnregistrer"
-        android:layout_alignBottom="@+id/buttonEnregistrer"
-        android:layout_toRightOf="@+id/buttonEnregistrer"
-        android:text="Annuler" 
-        android:onClick="cancelPreference"/>    
+        android:weightSum="1"
+        android:layout_alignParentTop="false"
+        android:layout_alignParentLeft="false"
+        android:layout_alignParentStart="true"
+        android:id="@+id/linearLayout4" >
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/title_activity_preferences"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+    </LinearLayout>
 </RelativeLayout>
 <!-- From: file:/C:/Users/Phantom/git/AlerteIncidents/app/src/main/res/layout/activity_preferences.xml -->
