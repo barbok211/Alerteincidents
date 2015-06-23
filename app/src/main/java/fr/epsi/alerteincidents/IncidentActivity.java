@@ -9,14 +9,17 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.location.Location;
+import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -34,11 +37,14 @@ import retrofit.Callback;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 
-public class IncidentActivity extends Activity{
+import static android.location.LocationManager.*;
+
+public class IncidentActivity extends Activity {
     // used to store app title
     private CharSequence mTitle;
     private final String tag = "IncidentActivity";
     private FusedLocationService mFusedLocation;
+    private Button validerButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +69,7 @@ public class IncidentActivity extends Activity{
 
             @Override
             public void failure(RetrofitError error) {
+                typeIncidentSpinner.setPrompt("Pas de connexion internet");
             }
         };
         methods.getTypesIncidents(callback);
@@ -70,67 +77,58 @@ public class IncidentActivity extends Activity{
         mFusedLocation = new FusedLocationService(this);
 
         //bouton valider
-        Button validerButton = (Button) findViewById(R.id.validerButton);
+        validerButton = (Button) findViewById(R.id.validerButton);
         validerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                // Get Location Manager and check for GPS & Network location services
                 LocationManager lm = (LocationManager) getSystemService(LOCATION_SERVICE);
-                if(!lm.isProviderEnabled(LocationManager.GPS_PROVIDER) ||
-                        !lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
-                    // Build the alert dialog
-                    AlertDialog.Builder builder = new AlertDialog.Builder(IncidentActivity.this);
-                    builder.setTitle("Location Services Not Active");
-                    builder.setMessage("Please enable Location Services and GPS");
-                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            // Show location settings when the user acknowledges the alert dialog
-                            Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                            startActivity(intent);
-                        }
-                    });
-                    Dialog alertDialog = builder.create();
-                    alertDialog.setCanceledOnTouchOutside(false);
-                    alertDialog.show();
-                }
+                final EditText titreIncident = (EditText) findViewById(R.id.titreIncidentEditText);
+                final EditText descIncident = (EditText) findViewById(R.id.descriptionIncidentEditText);
 
-                final EditText titreIncident = (EditText)findViewById(R.id.titreIncidentEditText);
-                final EditText descIncident = (EditText)findViewById(R.id.descriptionIncidentEditText);
+                if (titreIncident.getText().toString().equals("")) {
+                    titreIncident.setError("Entrez un titre d'incident");
+                } else {
+                    if (lm.isProviderEnabled(GPS_PROVIDER) &&
+                            lm.isProviderEnabled(NETWORK_PROVIDER)) {
 
-                Location mLastLocation = mFusedLocation.getLocation();
+                        Location mLastLocation = mFusedLocation.getLocation();
 
-                Incident i = new Incident(Build.SERIAL, titreIncident.getText().toString(), (TypeIncident)typeIncidentSpinner.getSelectedItem(), descIncident.getText().toString(),
-                        mLastLocation.getLatitude(), mLastLocation.getLongitude(), java.text.DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime()));
+                        Incident i = new Incident(Build.SERIAL, titreIncident.getText().toString(), (TypeIncident) typeIncidentSpinner.getSelectedItem(), descIncident.getText().toString(),
+                                mLastLocation.getLatitude(), mLastLocation.getLongitude(), java.text.DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime()));
 
-                RestAdapter restAdapter = new RestAdapter.Builder()
-                        .setEndpoint(MainActivity.API_URL)
-                        .setLogLevel(RestAdapter.LogLevel.FULL)
-                        .setLog(new RestAdapter.Log() {
+                        RestAdapter restAdapter = new RestAdapter.Builder()
+                                .setEndpoint(MainActivity.API_URL)
+                                .setLogLevel(RestAdapter.LogLevel.FULL)
+                                .setLog(new RestAdapter.Log() {
+                                    @Override
+                                    public void log(String msg) {
+                                        Log.d("Retrofit", msg);
+                                    }
+                                }).build();
+                        RestApi methods = restAdapter.create(RestApi.class);
+                        methods.createIncident(i, new Callback<Incident>() {
                             @Override
-                            public void log(String msg) {
-                                Log.d("Retrofit", msg);
+                            public void success(Incident incident, retrofit.client.Response response) {
+                                Toast.makeText(IncidentActivity.this, "Success", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(IncidentActivity.this, HistoriqueActivity.class);
+                                startActivity(intent);
+                                IncidentActivity.this.finish();
                             }
-                        }).build();
-                RestApi methods = restAdapter.create(RestApi.class);
-                methods.createIncident(i, new Callback<Incident>() {
-                    @Override
-                    public void success(Incident incident, retrofit.client.Response response) {
-                        Toast.makeText(IncidentActivity.this, "Success", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(IncidentActivity.this, HistoriqueActivity.class);
-                        startActivity(intent);
-                        IncidentActivity.this.finish();
-                    }
 
-                    @Override
-                    public void failure(RetrofitError error) {
-                        Toast.makeText(IncidentActivity.this, "Erreur, vérifiez votre connexion internet", Toast.LENGTH_SHORT).show();
+                            @Override
+                            public void failure(RetrofitError error) {
+                                Toast.makeText(IncidentActivity.this, "Erreur, vérifiez votre connexion internet", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    } else {
+                        Toast.makeText(IncidentActivity.this, "Erreur, veuillez activer la localisation GPS et votre connexion internet", Toast.LENGTH_SHORT).show();
                     }
-                });
+                }
             }
         });
-
     }
+
 
     //gestion bouton retour
     public void onBackPressed() {

@@ -1428,18 +1428,20 @@ containing a value of this type.
         public static final int create_calendar_title=0x7f0b0030;
         public static final int create_incident=0x7f0b0031;
         public static final int decline=0x7f0b0032;
-        public static final int descriptionIncident=0x7f0b0033;
-        public static final int hello_world=0x7f0b0034;
-        public static final int incident_type=0x7f0b0035;
-        public static final int store_picture_message=0x7f0b0036;
-        public static final int store_picture_title=0x7f0b0037;
-        public static final int title=0x7f0b0038;
-        public static final int title_activity_carte=0x7f0b0039;
-        public static final int title_activity_historique=0x7f0b003a;
-        public static final int title_activity_incident=0x7f0b003b;
-        public static final int title_activity_preferences=0x7f0b003c;
-        public static final int title_activity_profil=0x7f0b003d;
-        public static final int wallet_buy_button_place_holder=0x7f0b003e;
+        public static final int descIncident=0x7f0b0033;
+        public static final int descriptionIncident=0x7f0b0034;
+        public static final int hello_world=0x7f0b0035;
+        public static final int incident_type=0x7f0b0036;
+        public static final int store_picture_message=0x7f0b0037;
+        public static final int store_picture_title=0x7f0b0038;
+        public static final int title=0x7f0b0039;
+        public static final int title_activity_carte=0x7f0b003a;
+        public static final int title_activity_historique=0x7f0b003b;
+        public static final int title_activity_incident=0x7f0b003c;
+        public static final int title_activity_preferences=0x7f0b003d;
+        public static final int title_activity_profil=0x7f0b003e;
+        public static final int titreIncident=0x7f0b003f;
+        public static final int wallet_buy_button_place_holder=0x7f0b0040;
     }
     public static final class style {
         /** 

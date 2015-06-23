@@ -230,6 +230,7 @@ available. Please contact the developer for assistance.</string>
     <string name="decline">Decline</string>
     <!-- From: file:/C:/Users/Phantom/git/AlerteIncidents/app/src/main/res/values/strings.xml -->
     <eat-comment/>
+    <string name="descIncident">Entrez une description d\'incident</string>
     <string name="descriptionIncident">Description</string>
     <string name="hello_world">Hello world!</string>
     <string name="incident_type">Type d\'incident</string>
@@ -245,6 +246,7 @@ available. Please contact the developer for assistance.</string>
     <string name="title_activity_incident">Signaler un incident</string>
     <string name="title_activity_preferences">Preferences</string>
     <string name="title_activity_profil">Profil</string>
+    <string name="titreIncident">Entrez un titre d\'incident</string>
     <!-- From: file:/C:/Users/Phantom/git/AlerteIncidents/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-wallet/7.0.0/res/values/wallet_strings.xml -->
     <eat-comment/>
     <string name="wallet_buy_button_place_holder" translation_description="Text on a button that allows a user to make a payment with Google Wallet [CHAR LIMIT=30]">Buy with Google</string>

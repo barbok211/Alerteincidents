@@ -265,44 +265,32 @@ ADDED from AndroidManifest.xml:42:9
 		ADDED from AndroidManifest.xml:44:13
 	android:name
 		ADDED from AndroidManifest.xml:43:13
-activity#fr.epsi.alerteincidents.Carte
+activity#fr.epsi.alerteincidents.CarteActivity
 ADDED from AndroidManifest.xml:46:9
 	android:label
 		ADDED from AndroidManifest.xml:48:13
 	android:name
 		ADDED from AndroidManifest.xml:47:13
-activity#fr.epsi.alerteincidents.CarteActivity
+activity#fr.epsi.alerteincidents.IncidentActivity
 ADDED from AndroidManifest.xml:50:9
 	android:label
 		ADDED from AndroidManifest.xml:52:13
 	android:name
 		ADDED from AndroidManifest.xml:51:13
-activity#fr.epsi.alerteincidents.IncidentActivity
+activity#fr.epsi.alerteincidents.PreferencesActivity
 ADDED from AndroidManifest.xml:54:9
 	android:label
 		ADDED from AndroidManifest.xml:56:13
 	android:name
 		ADDED from AndroidManifest.xml:55:13
-activity#fr.epsi.alerteincidents.PreferencesActivity
+activity#fr.epsi.alerteincidents.HistoriqueActivity
 ADDED from AndroidManifest.xml:58:9
 	android:label
 		ADDED from AndroidManifest.xml:60:13
 	android:name
 		ADDED from AndroidManifest.xml:59:13
-activity#fr.epsi.alerteincidents.ProfilActivity
-ADDED from AndroidManifest.xml:62:9
-	android:label
-		ADDED from AndroidManifest.xml:64:13
-	android:name
-		ADDED from AndroidManifest.xml:63:13
-activity#fr.epsi.alerteincidents.HistoriqueActivity
-ADDED from AndroidManifest.xml:66:9
-	android:label
-		ADDED from AndroidManifest.xml:68:13
-	android:name
-		ADDED from AndroidManifest.xml:67:13
 meta-data#com.google.android.gms.version
-ADDED from AndroidManifest.xml:71:9
+ADDED from AndroidManifest.xml:63:9
 MERGED from com.google.android.gms:play-services-base:7.0.0:21:9
 MERGED from com.google.android.gms:play-services-base:7.0.0:21:9
 MERGED from com.google.android.gms:play-services-base:7.0.0:21:9
@@ -330,12 +318,12 @@ MERGED from com.google.android.gms:play-services-base:7.0.0:21:9
 MERGED from com.google.android.gms:play-services-base:7.0.0:21:9
 MERGED from com.google.android.gms:play-services-base:7.0.0:21:9
 	android:value
-		ADDED from AndroidManifest.xml:73:6
+		ADDED from AndroidManifest.xml:65:6
 	android:name
-		ADDED from AndroidManifest.xml:72:6
+		ADDED from AndroidManifest.xml:64:6
 meta-data#com.google.android.maps.v2.API_KEY
-ADDED from AndroidManifest.xml:75:6
+ADDED from AndroidManifest.xml:67:6
 	android:value
-		ADDED from AndroidManifest.xml:76:6
+		ADDED from AndroidManifest.xml:68:6
 	android:name
-		ADDED from AndroidManifest.xml:75:17
+		ADDED from AndroidManifest.xml:67:17

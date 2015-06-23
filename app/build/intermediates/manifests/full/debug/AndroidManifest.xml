@@ -44,10 +44,6 @@
             android:label="@string/app_name" >
         </activity>
         <activity
-            android:name="fr.epsi.alerteincidents.Carte"
-            android:label="@string/title_activity_carte" >
-        </activity>
-        <activity
             android:name="fr.epsi.alerteincidents.CarteActivity"
             android:label="@string/title_activity_carte" >
         </activity>
@@ -58,10 +54,6 @@
         <activity
             android:name="fr.epsi.alerteincidents.PreferencesActivity"
             android:label="@string/title_activity_preferences" >
-        </activity>
-        <activity
-            android:name="fr.epsi.alerteincidents.ProfilActivity"
-            android:label="@string/title_activity_profil" >
         </activity>
         <activity
             android:name="fr.epsi.alerteincidents.HistoriqueActivity"

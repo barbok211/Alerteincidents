@@ -13,5 +13,7 @@
     <string name="descriptionIncident">Description</string>
     <string name="create_incident">Créer incident</string>
     <string name="incident_type">Type d\'incident</string>
+    <string name="titreIncident">Entrez un titre d\'incident</string>
+    <string name="descIncident">Entrez une description d\'incident</string>
 
 </resources>
