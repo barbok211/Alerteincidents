@@ -1224,6 +1224,9 @@ containing a value of this type.
         public static final int splash_screen=0x7f02007e;
     }
     public static final class id {
+        public static final int RecyclerViewTypesIncidents=0x7f090062;
+        public static final int TypesIncidents_boxType=0x7f090065;
+        public static final int TypesIncidents_nomType=0x7f090064;
         public static final int action_bar=0x7f090032;
         public static final int action_bar_activity_content=0x7f090000;
         public static final int action_bar_container=0x7f090031;
@@ -1231,15 +1234,15 @@ containing a value of this type.
         public static final int action_bar_root=0x7f090030;
         public static final int action_bar_subtitle=0x7f090039;
         public static final int action_bar_title=0x7f090038;
-        public static final int action_carte=0x7f090064;
+        public static final int action_carte=0x7f090067;
         public static final int action_context_bar=0x7f090033;
-        public static final int action_historique=0x7f090065;
-        public static final int action_incident=0x7f090066;
-        public static final int action_main=0x7f090063;
+        public static final int action_historique=0x7f090068;
+        public static final int action_incident=0x7f090069;
+        public static final int action_main=0x7f090066;
         public static final int action_menu_divider=0x7f090001;
         public static final int action_menu_presenter=0x7f090002;
         public static final int action_mode_close_button=0x7f09003a;
-        public static final int action_preferences=0x7f090067;
+        public static final int action_preferences=0x7f09006a;
         public static final int activity_chooser_view_content=0x7f09003b;
         public static final int adjust_height=0x7f090014;
         public static final int adjust_width=0x7f090015;
@@ -1291,7 +1294,7 @@ containing a value of this type.
         public static final int none=0x7f09000f;
         public static final int normal=0x7f090007;
         public static final int production=0x7f090022;
-        public static final int progressBar=0x7f090062;
+        public static final int progressBar=0x7f090063;
         public static final int progress_circular=0x7f090004;
         public static final int progress_horizontal=0x7f090005;
         public static final int radio=0x7f090045;
@@ -1364,7 +1367,8 @@ containing a value of this type.
         public static final int activity_main=0x7f03001b;
         public static final int activity_preferences=0x7f03001c;
         public static final int activity_splash=0x7f03001d;
-        public static final int support_simple_spinner_dropdown_item=0x7f03001e;
+        public static final int preferencescell=0x7f03001e;
+        public static final int support_simple_spinner_dropdown_item=0x7f03001f;
     }
     public static final class menu {
         public static final int main=0x7f0d0000;

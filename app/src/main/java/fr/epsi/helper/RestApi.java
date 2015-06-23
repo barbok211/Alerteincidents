@@ -24,6 +24,9 @@ public interface RestApi {
     @GET("/incidents/types")
     public void getTypesIncidents(Callback<List<TypeIncident>> cb);
 
+    @GET("/incidents/types")
+    public List<TypeIncident> getTypesIncidents();
+
     @POST("/incident")
     public void createIncident(@Body Incident i, Callback<Incident> cb);
 

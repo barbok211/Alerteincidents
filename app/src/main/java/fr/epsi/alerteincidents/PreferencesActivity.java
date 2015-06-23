@@ -12,8 +12,18 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import classes.metier.TypeIncident;
+import fr.epsi.helper.RestApi;
+import retrofit.Callback;
+import retrofit.RestAdapter;
+import retrofit.RetrofitError;
 
 public class PreferencesActivity extends Activity {
 	// used to store app title
@@ -28,8 +38,18 @@ public class PreferencesActivity extends Activity {
 
         RecyclerView rv = (RecyclerView)findViewById(R.id.RecyclerViewTypesIncidents);
         rv.setHasFixedSize(true);
-        LinearLayoutManager llm = new LinearLayoutManager(PreferencesActivity.this);
-        rv.setLayoutManager(llm);
+
+        final ArrayAdapter typeIncidentAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item);
+        RestAdapter restAdapter = new RestAdapter.Builder()
+                .setEndpoint(MainActivity.API_URL)
+                .build();
+        RestApi methods = restAdapter.create(RestApi.class);
+        List<TypeIncident> l = new ArrayList<TypeIncident>();
+        l = methods.getTypesIncidents();
+
+
+        rv.setAdapter(new PreferencesAdapter(l));
+        rv.setLayoutManager(new LinearLayoutManager(this));
 	}
 
 	//gestion bouton retour

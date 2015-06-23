@@ -6,32 +6,48 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="fr.epsi.alerteincidents.PreferencesActivity" >
+    tools:context="fr.epsi.alerteincidents.PreferencesActivity">
 
-    <!-- CheckBox -->
 
-    <!-- Button -->
 
     <LinearLayout
-        android:orientation="vertical"
+        android:id="@+id/linearLayout4"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:weightSum="1"
-        android:layout_alignParentTop="false"
         android:layout_alignParentLeft="false"
         android:layout_alignParentStart="true"
-        android:id="@+id/linearLayout4" >
+        android:layout_alignParentTop="false"
+        android:orientation="vertical"
+        android:weightSum="1">
 
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="@string/title_activity_preferences"
-            android:textStyle="bold"
-            android:gravity="center"
             android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
+            android:gravity="center"
+            android:text="@string/title_activity_preferences"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textStyle="bold" />
     </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/linearLayout4"
+        android:layout_marginTop="45dp"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/RecyclerViewTypesIncidents"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </android.support.v7.widget.RecyclerView>
+
+    </LinearLayout>
+
 </RelativeLayout>
 <!-- From: file:/C:/Users/Phantom/git/AlerteIncidents/app/src/main/res/layout/activity_preferences.xml -->

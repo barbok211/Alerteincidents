@@ -1,6 +1,7 @@
 package fr.epsi.alerteincidents;
 
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
@@ -22,12 +23,14 @@ public class PreferencesAdapter extends RecyclerView.Adapter<PreferencesAdapter.
 
     @Override
     public TypeIncidentViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        return null;
+        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.preferencescell, viewGroup, false);
+        return new TypeIncidentViewHolder(v);
     }
 
     @Override
     public void onBindViewHolder(TypeIncidentViewHolder typeIncidentViewHolder, int i) {
-
+        typeIncidentViewHolder.nomTypeIncident.setText(types.get(i).getNomType());
+        typeIncidentViewHolder.checkBoxTypeIncident.setEnabled(true);
     }
 
     @Override
@@ -44,6 +47,11 @@ public class PreferencesAdapter extends RecyclerView.Adapter<PreferencesAdapter.
             nomTypeIncident = (TextView)itemView.findViewById(R.id.TypesIncidents_nomType);
             checkBoxTypeIncident = (CheckBox)itemView.findViewById(R.id.TypesIncidents_boxType);
         }
+    }
+
+    @Override
+    public void onAttachedToRecyclerView(RecyclerView recyclerView) {
+        super.onAttachedToRecyclerView(recyclerView);
     }
 
 }

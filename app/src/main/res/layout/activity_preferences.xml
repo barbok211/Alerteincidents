@@ -45,21 +45,6 @@
             android:id="@+id/RecyclerViewTypesIncidents"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:gravity="center"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:id="@+id/TypesIncidents_nomType"/>
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/TypesIncidents_boxType" />
-
         </android.support.v7.widget.RecyclerView>
 
     </LinearLayout>

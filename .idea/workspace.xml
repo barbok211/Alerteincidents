@@ -49,24 +49,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="activity_incident.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_incident.xml">
-          <provider selected="true" editor-type-id="android-designer">
-            <state />
-          </provider>
-          <provider editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1377" max-vertical-offset="2516">
-              <caret line="92" column="42" selection-start-line="92" selection-start-column="42" selection-end-line="92" selection-end-column="42" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="strings.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
+      <file leaf-file-name="IncidentActivity.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/fr/epsi/alerteincidents/IncidentActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-4.08" vertical-offset="0" max-vertical-offset="425">
-              <caret line="6" column="51" selection-start-line="6" selection-start-column="51" selection-end-line="6" selection-end-column="51" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="187" max-vertical-offset="3145">
+              <caret line="56" column="25" selection-start-line="56" selection-start-column="0" selection-end-line="57" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -82,11 +69,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="build.gradle" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/build.gradle">
+      <file leaf-file-name="RestApi.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/fr/epsi/helper/RestApi.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="561">
-              <caret line="25" column="56" selection-start-line="25" selection-start-column="56" selection-end-line="25" selection-end-column="56" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="612">
+              <caret line="27" column="48" selection-start-line="27" selection-start-column="48" selection-end-line="27" selection-end-column="48" />
               <folding />
             </state>
           </provider>
@@ -102,21 +89,23 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="settings.gradle" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/settings.gradle">
+      <file leaf-file-name="PreferencesActivity.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/fr/epsi/alerteincidents/PreferencesActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="119">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="14" />
-              <folding />
+            <state vertical-scroll-proportion="0.0" vertical-offset="150" max-vertical-offset="2125">
+              <caret line="48" column="0" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
+              <folding>
+                <element signature="e#1568#1582#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PreferencesActivity.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/fr/epsi/alerteincidents/PreferencesActivity.java">
+      <file leaf-file-name="ActivityThread.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://E:/Android/sdk/sources/android-19/android/app/ActivityThread.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1289" max-vertical-offset="1955">
-              <caret line="120" column="5" selection-start-line="120" selection-start-column="5" selection-end-line="120" selection-end-column="5" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="35583" max-vertical-offset="82569">
+              <caret line="2261" column="0" selection-start-line="2261" selection-start-column="0" selection-end-line="2261" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -125,16 +114,14 @@
       <file leaf-file-name="PreferencesAdapter.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/fr/epsi/alerteincidents/PreferencesAdapter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.4574468" vertical-offset="150" max-vertical-offset="918">
-              <caret line="24" column="16" selection-start-line="24" selection-start-column="16" selection-end-line="24" selection-end-column="16" />
+            <state vertical-scroll-proportion="0.0543131" vertical-offset="255" max-vertical-offset="1054">
+              <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#512#513#0" expanded="true" />
-                <element signature="e#542#543#0" expanded="true" />
-                <element signature="e#640#641#0" expanded="true" />
-                <element signature="e#667#668#0" expanded="true" />
-                <element signature="e#825#826#0" expanded="true" />
-                <element signature="e#860#861#0" expanded="true" />
+                <element signature="e#548#549#0" expanded="true" />
+                <element signature="e#578#579#0" expanded="true" />
+                <element signature="e#1152#1153#0" expanded="true" />
+                <element signature="e#1187#1188#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -146,8 +133,8 @@
             <state />
           </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-14.76" vertical-offset="651" max-vertical-offset="1241">
-              <caret line="60" column="0" selection-start-line="60" selection-start-column="0" selection-end-line="60" selection-end-column="0" />
+            <state vertical-scroll-proportion="-12.04" vertical-offset="447" max-vertical-offset="986">
+              <caret line="44" column="55" selection-start-line="44" selection-start-column="29" selection-end-line="44" selection-end-column="55" />
               <folding>
                 <element signature="e#233#266#0" expanded="true" />
                 <element signature="e#291#326#0" expanded="true" />
@@ -155,6 +142,19 @@
                 <element signature="e#411#444#0" expanded="true" />
                 <element signature="e#1198#1234#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="preferencescell.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/preferencescell.xml">
+          <provider editor-type-id="android-designer">
+            <state />
+          </provider>
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-1.36" vertical-offset="0" max-vertical-offset="476">
+              <caret line="2" column="23" selection-start-line="2" selection-start-column="23" selection-end-line="2" selection-end-column="23" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -1068,7 +1068,6 @@
         <option value="$PROJECT_DIR$/app/src/main/java/fr/epsi/helper/RequestJson.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/classes/metier/TypeIncident.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/classes/metier/Incident.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/fr/epsi/helper/RestApi.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/fr/epsi/alerteincidents/HistoriqueActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/fr/epsi/helper/FusedLocationService.java" />
         <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
@@ -1076,9 +1075,11 @@
         <option value="$PROJECT_DIR$/app/src/main/java/fr/epsi/alerteincidents/IncidentActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/app/build.gradle" />
-        <option value="$PROJECT_DIR$/app/src/main/java/fr/epsi/alerteincidents/PreferencesActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_preferences.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/preferencescell.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/fr/epsi/alerteincidents/PreferencesAdapter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/fr/epsi/helper/RestApi.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/fr/epsi/alerteincidents/PreferencesActivity.java" />
       </list>
     </option>
   </component>
@@ -1556,7 +1557,7 @@
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32881355" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32881355" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.42542374" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.42542374" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2322034" sideWeight="0.39274925" order="13" side_tool="true" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.29758307" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -1625,20 +1626,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/settings.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="119">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/import-summary.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="100">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="204" max-vertical-offset="323">
@@ -1874,14 +1861,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/fr/epsi/helper/RestApi.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="204" max-vertical-offset="561">
-          <caret line="36" column="24" selection-start-line="36" selection-start-column="24" selection-end-line="36" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/fr/epsi/helper/FusedLocationService.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1047" max-vertical-offset="1445">
@@ -1910,14 +1889,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1714" max-vertical-offset="2584">
           <caret line="16" column="39" selection-start-line="16" selection-start-column="39" selection-end-line="16" selection-end-column="39" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/fr/epsi/alerteincidents/IncidentActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="799" max-vertical-offset="3145">
-          <caret line="94" column="35" selection-start-line="94" selection-start-column="35" selection-end-line="94" selection-end-column="35" />
           <folding />
         </state>
       </provider>
@@ -1981,21 +1952,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/fr/epsi/alerteincidents/PreferencesActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1289" max-vertical-offset="1955">
-          <caret line="120" column="5" selection-start-line="120" selection-start-column="5" selection-end-line="120" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_preferences.xml">
       <provider editor-type-id="android-designer">
         <state />
       </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-14.76" vertical-offset="651" max-vertical-offset="1241">
-          <caret line="60" column="0" selection-start-line="60" selection-start-column="0" selection-end-line="60" selection-end-column="0" />
+        <state vertical-scroll-proportion="-12.04" vertical-offset="447" max-vertical-offset="986">
+          <caret line="44" column="55" selection-start-line="44" selection-start-column="29" selection-end-line="44" selection-end-column="55" />
           <folding>
             <element signature="e#233#266#0" expanded="true" />
             <element signature="e#291#326#0" expanded="true" />
@@ -2006,18 +1969,61 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/preferencescell.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.36" vertical-offset="0" max-vertical-offset="476">
+          <caret line="2" column="23" selection-start-line="2" selection-start-column="23" selection-end-line="2" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/fr/epsi/helper/RestApi.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="612">
+          <caret line="27" column="48" selection-start-line="27" selection-start-column="48" selection-end-line="27" selection-end-column="48" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://E:/Android/sdk/sources/android-19/android/app/ActivityThread.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="35583" max-vertical-offset="82569">
+          <caret line="2261" column="0" selection-start-line="2261" selection-start-column="0" selection-end-line="2261" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/fr/epsi/alerteincidents/IncidentActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="187" max-vertical-offset="3145">
+          <caret line="56" column="25" selection-start-line="56" selection-start-column="0" selection-end-line="57" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/fr/epsi/alerteincidents/PreferencesActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="150" max-vertical-offset="2125">
+          <caret line="48" column="0" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
+          <folding>
+            <element signature="e#1568#1582#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/fr/epsi/alerteincidents/PreferencesAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4574468" vertical-offset="150" max-vertical-offset="918">
-          <caret line="24" column="16" selection-start-line="24" selection-start-column="16" selection-end-line="24" selection-end-column="16" />
+        <state vertical-scroll-proportion="0.0543131" vertical-offset="255" max-vertical-offset="1054">
+          <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#512#513#0" expanded="true" />
-            <element signature="e#542#543#0" expanded="true" />
-            <element signature="e#640#641#0" expanded="true" />
-            <element signature="e#667#668#0" expanded="true" />
-            <element signature="e#825#826#0" expanded="true" />
-            <element signature="e#860#861#0" expanded="true" />
+            <element signature="e#548#549#0" expanded="true" />
+            <element signature="e#578#579#0" expanded="true" />
+            <element signature="e#1152#1153#0" expanded="true" />
+            <element signature="e#1187#1188#0" expanded="true" />
           </folding>
         </state>
       </provider>
