@@ -11,6 +11,8 @@ import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ProgressBar;
+
+import fr.epsi.database.DbHelper;
 import fr.epsi.helper.RequestJson;
 import fr.epsi.helper.RequestJson.mCallback;
 import fr.epsi.helper.VarsGlobals;
@@ -35,6 +37,7 @@ public class SplashScreen extends Activity {
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         VarsGlobals.set("IMEI","12345678910111");

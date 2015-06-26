@@ -10,7 +10,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
-import android.database.SQLException;
 import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
@@ -22,11 +21,13 @@ import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 import classes.metier.IncidentDB;
-import fr.epsi.database.DataSource;
+import fr.epsi.database.DbHelper;
 import fr.epsi.helper.FusedLocationService;
 
 public class CarteActivity extends Activity {
@@ -36,7 +37,7 @@ public class CarteActivity extends Activity {
 	private FusedLocationService mFusedLocation;
 	private CharSequence mTitle;
 	private HashMap<Marker,IncidentDB> marker2incident;
-	private DataSource dataSource;
+	private DbHelper mLocalDatabase;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -57,27 +58,19 @@ public class CarteActivity extends Activity {
 		mFusedLocation = new FusedLocationService(this);
 		Location location = mFusedLocation.getLocation();
 		marker2incident = new HashMap<Marker, IncidentDB>();
-		dataSource = new DataSource(this);
+		mLocalDatabase = new DbHelper(this);
 
-		try {
-			dataSource.open();
-		} catch (SQLException e){
-			//Log.e("sql error", e.getMessage());
-		}
-		
-		Log.v("addMarkersIncidents","YOEOE");
-		addMarkersIncidents(dataSource);
+		//ajout markers
+		addMarkersIncidents(mLocalDatabase);
 
 		// est appele lorsqu'on clique sur la fenetre info
-		map.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener(){
+		map.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
 			@Override
-			public void onInfoWindowClick(Marker marker)
-			{
-                IncidentDB item = marker2incident.get(marker);
-				SharedPreferences prefs = getSharedPreferences("AlerteIncidents",Context.MODE_PRIVATE);
+			public void onInfoWindowClick(Marker marker) {
+				IncidentDB item = marker2incident.get(marker);
+				SharedPreferences prefs = getSharedPreferences("AlerteIncidents", Context.MODE_PRIVATE);
 				Editor edit = prefs.edit();
 				edit.putLong("item_id", item.getId());
-				edit.putBoolean("is_golf", false);
 				edit.commit();
 				startDetailActivity();
 
@@ -96,26 +89,22 @@ public class CarteActivity extends Activity {
 	}
 
 	//add Incidents on map with marker
-	private void addMarkersIncidents(DataSource data_source)
+	private void addMarkersIncidents(DbHelper mLocalDatabase)
 	{
-		List<IncidentDB> list_Incident = data_source.getAllIncident();
+		List<IncidentDB> list_Incident = mLocalDatabase.getAllIncidents();
 
-		Iterator<IncidentDB> it = list_Incident.iterator();
-		int i=0;
-		while (it.hasNext())
-		{
-			/*Log.v("MarkerAdd", String.valueOf(i) + " Times");
-			Incident item = (Incident) it.next();
-			LatLng latlng = new LatLng(Long.valueOf(item.getString(DbHelper.COLUMN_INCIDENT_LATITUDE)),
-					Long.valueOf(item.getString(DbHelper.COLUMN_INCIDENT_LONGITUDE)));
+		for (int i=0;i<list_Incident.size();i++){
+			IncidentDB item = (IncidentDB) list_Incident.get(i);
+			LatLng latlng = new LatLng(Double.valueOf(item.getString(DbHelper.COLUMN_INCIDENT_LATITUDE)),
+					Double.valueOf(item.getString(DbHelper.COLUMN_INCIDENT_LONGITUDE)));
 			Marker temp = map.addMarker(new MarkerOptions()
-			.position(latlng)
-			.title(item.getString(DbHelper.COLUMN_INCIDENT_NAME))
-			.snippet(item.getString(DbHelper.COLUMN_INCIDENT_DATE))
-			.icon(BitmapDescriptorFactory.fromResource(R.drawable.map_marker))
-			.visible(true)
-					);
-			marker2incident.put(temp, item);*/
+							.position(latlng)
+							.title(item.getString(DbHelper.COLUMN_INCIDENT_TITRE))
+							.snippet(item.getString(DbHelper.COLUMN_INCIDENT_DATE))
+							.icon(BitmapDescriptorFactory.fromResource(R.drawable.map_marker))
+							.visible(true)
+			);
+			marker2incident.put(temp, item);
 		}
 	}
 
@@ -222,14 +211,14 @@ public class CarteActivity extends Activity {
 		Log.v("addMarkerIncident",String.valueOf(mList.size()));
 		List<IncidentDB> list_incident = mList;//liste des incidents
 		Iterator<IncidentDB> it = list_incident.iterator();
-		/*
+
 		while (it.hasNext())
 		{
-			Incident item = (Incident) it.next();
+			IncidentDB item = (IncidentDB) it.next();
 			//l'image du marker
 			int res = R.drawable.ic_launcher;
-			LatLng mLatlng = new LatLng(item.getLatitude(),item.getLongitude());
-			String title = item.getTitre();
+			LatLng mLatlng = new LatLng(Double.valueOf(item.getString("latitude")),Double.valueOf(item.getString("longitude")));
+			String title = item.getString("titreIncident");
 
 			Marker temp = map.addMarker(new MarkerOptions()
 			//position en LatLng de l'infobulle	
@@ -243,6 +232,6 @@ public class CarteActivity extends Activity {
 					);
 
 			marker2incident.put(temp, item);
-		}*/
+		}
 	}
 }

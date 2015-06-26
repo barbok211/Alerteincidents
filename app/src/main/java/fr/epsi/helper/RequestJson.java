@@ -4,28 +4,24 @@ import java.util.ArrayList;
 
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import android.content.Context;
-import android.database.SQLException;
 import android.os.Handler;
 import android.util.Log;
 
-import com.android.volley.Request.Method;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.google.android.gms.maps.model.LatLng;
 
 import classes.metier.IncidentDB;
 import fr.epsi.alerteincidents.AppController;
-import fr.epsi.database.DataSource;
 import fr.epsi.database.DbHelper;
 
 public class RequestJson {
+	private DbHelper mLocalDatabase;
 	private ArrayList<IncidentDB> mListIncident;
 	private int mProgress;
-	private final DataSource data_source;
 	private mCallback callback;
 
 	private static int NONE = 0;
@@ -40,17 +36,11 @@ public class RequestJson {
 	}
 
 	public RequestJson(Context c){
+		mLocalDatabase = new DbHelper(c);
 		this.mProgress = 0;
-		this.data_source = new DataSource(c);
 		callback = null;
 		mListIncident = new ArrayList<IncidentDB>();
 		load_state = NONE;
-
-		try {
-			this.data_source.open();
-		} catch (SQLException e){
-
-		}
 	}
 	
 	public void waitProgress()
@@ -84,7 +74,8 @@ public class RequestJson {
 		else if (mProgress == 0 && load_state == INCIDENT)
 		{
 			load_state = FINISH;
-			data_source.close();
+			Log.v("End Load Incident","load_state " +load_state);
+			//data_source.close();
 			callback.onFinish();
 			mProgress = 100;
 			return;
@@ -113,39 +104,39 @@ public class RequestJson {
 
 		Log.v("Url Done", mWbs.getUrl());
 
-		StringRequest strReq = new StringRequest(Method.GET,
-				mWbs.getUrl(), new Response.Listener<String>() {
+		JsonArrayRequest strReq = new JsonArrayRequest(mWbs.getUrl(),new Response.Listener<JSONArray>(){
+				//(Method.GET, mWbs.getUrl(), new Response.Listener<JSONArray>() {
+
 			@Override
-			public void onResponse(String response) {
-				Log.v("onResponse","OK");
+			public void onResponse(JSONArray response) {
 				try {
-					JSONObject mainObject = new JSONObject(response.toString());
-					Log.v("mainObject",String.valueOf(mainObject));
-					/*JSONObject myObj = mainObject.getJSONObject("json");
-					JSONArray list_incidents = myObj.getJSONArray("json");*/
-					JSONArray list_incidents = mainObject.getJSONArray("json");
-					
-					for(int i=0; i<list_incidents.length(); i++){
+					for(int i=0; i<response.length(); i++){
                         IncidentDB incident_item = new IncidentDB();
-						
 						//recuperation donnees
-						int idIncident = list_incidents.getJSONObject(i).getInt("idIncident");
-						String titreIncident = list_incidents.getJSONObject(i).getString("titreIncident");
-						String dateIncident = list_incidents.getJSONObject(i).getString("dateIncident");
-						Double latIncident = list_incidents.getJSONObject(i).getDouble("latitude");
-						Double lngIncident = list_incidents.getJSONObject(i).getDouble("longitude");
-						
+						int idIncident = Integer.valueOf(response.getJSONObject(i).getString("idIncident"));
+						String titreIncident = response.getJSONObject(i).getString("titreIncident");
+						String dateIncident = response.getJSONObject(i).getString("dateIncident");
+						Double latIncident = response.getJSONObject(i).getDouble("latitude");
+						Double lngIncident = response.getJSONObject(i).getDouble("longitude");
+						int idTypeIncident = response.getJSONObject(i).getInt("idTypeIncident");
+
 						//insertion dans la db
-						incident_item.setString(DbHelper.COLUMN_INCIDENT_ID, 
+						mLocalDatabase.insertIncident(dateIncident,titreIncident,
+								lngIncident.toString(),latIncident.toString(),String.valueOf(idTypeIncident));
+
+						incident_item.setString(DbHelper.COLUMN_INCIDENT_ID,
 								String.valueOf(idIncident));
-						incident_item.setString(DbHelper.COLUMN_INCIDENT_NAME, 
+						incident_item.setString(DbHelper.COLUMN_INCIDENT_TITRE,
 								String.valueOf(titreIncident));
-						incident_item.setString(DbHelper.COLUMN_INCIDENT_LATITUDE, 
+						incident_item.setString(DbHelper.COLUMN_INCIDENT_DATE,
+								String.valueOf(dateIncident));
+						incident_item.setString(DbHelper.COLUMN_INCIDENT_LATITUDE,
 								String.valueOf(latIncident));
 						incident_item.setString(DbHelper.COLUMN_INCIDENT_LONGITUDE,
 								String.valueOf(lngIncident));
-						
-						Log.v(titreIncident, dateIncident +" / "+ String.valueOf(idIncident));
+						incident_item.setString(DbHelper.COLUMN_INCIDENT_TYPE_ID,
+								String.valueOf(idTypeIncident));
+
 						mListIncident.add(incident_item);
 					}
 					updateProgress(mProgress+100);
