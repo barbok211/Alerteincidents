@@ -16,19 +16,31 @@ public class DbHelper extends SQLiteOpenHelper{
 	
 	//list of tables
 	public static final String NOM_TABLE_INCIDENT = "Incident";
+	public static final String NOM_TABLE_HLOC = "Hloc";
+
 	//name of db
 	public static final String DATABASE_NAME = "DB_AI.db";
 	//version
-	public static int DATABASE_VERSION = 2;
+	public static int DATABASE_VERSION = 4;
 	// Database creation sql statement
 
 	// Columns Incident Table
 	public static final String COLUMN_INCIDENT_ID = "incident_id";
 	public static final String COLUMN_INCIDENT_DATE = "incident_date";
-	public static final String COLUMN_INCIDENT_TITRE = "incident_name";
+	public static final String COLUMN_INCIDENT_TITRE = "incident_titre";
 	public static final String COLUMN_INCIDENT_LONGITUDE = "incident_longitude";
 	public static final String COLUMN_INCIDENT_LATITUDE = "incident_latitude";
 	public static final String COLUMN_INCIDENT_TYPE_ID = "incident_type_id";
+
+	// Columns Historique Local Table
+	public static final String COLUMN_HLOC_id = "hloc_id";
+	public static final String COLUMN_HLOC_ADRESSE = "hloc_adresse";
+	public static final String COLUMN_HLOC_DATE = "hloc_date";
+	public static final String COLUMN_HLOC_TITRE = "hloc_titre";
+	public static final String COLUMN_HLOC_LATTITUDE = "hloc_lattitude";
+	public static final String COLUMN_HLOC_LONGITUDE = "hloc_longitude";
+	public static final String COLUMN_HLOC_type_id = "hloc_type_id";
+
 
 
 	//constructeur avec un context
@@ -41,27 +53,36 @@ public class DbHelper extends SQLiteOpenHelper{
 		database.execSQL(
 				"CREATE TABLE Incident ("
 						+ "incident_id INTEGER PRIMARY KEY," + "incident_date TEXT,"
-						+ " incident_name TEXT," + "incident_longitude TEXT,"
+						+ "incident_titre TEXT," + "incident_longitude TEXT,"
 						+ "incident_latitude TEXT," + " incident_type_id TEXT"
+						+ " );" +
+
+						"CREATE TABLE Hloc ("
+						+ "hloc_id INTEGER PRIMARY KEY," + "hloc_adresse TEXT," + "hloc_date TEXT,"
+						+ "hloc_titre TEXT," + "hloc_longitude TEXT,"
+						+ "hloc_latitude TEXT," + " hloc_type_id TEXT"
 						+ " );"
 		);
+
 	}
 	
 	//upgrade db
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-		db.execSQL("DROP TABLE IF EXISTS " + NOM_TABLE_INCIDENT);
+		db.execSQL("DROP TABLE IF EXISTS " + NOM_TABLE_INCIDENT+";" +
+						"DROP TABLE IF EXISTS " + NOM_TABLE_HLOC+";");
 		onCreate(db);
 	}
 
-	public boolean insertIncident (String incident_date, String incident_name,
+/**INCIDENT HELPERS*/
+	public boolean insertIncident (String incident_date, String incident_titre,
 									String incident_longitude,String incident_latitude,
 									String type_incident_id)
 	{
 		SQLiteDatabase db = this.getWritableDatabase();
 		ContentValues contentValues = new ContentValues();
 		contentValues.put("incident_date", incident_date);
-		contentValues.put("incident_name", incident_name);
+		contentValues.put("incident_titre", incident_titre);
 		contentValues.put("incident_longitude", incident_longitude);
 		contentValues.put("incident_latitude", incident_latitude);
 		contentValues.put("incident_type_id", type_incident_id);
@@ -69,25 +90,40 @@ public class DbHelper extends SQLiteOpenHelper{
 		return true;
 	}
 
-	public Cursor getData(int id){
+	public IncidentDB getIncidentData(int id){
 		SQLiteDatabase db = this.getReadableDatabase();
-		Cursor res =  db.rawQuery( "SELECT * FROM "+ NOM_TABLE_INCIDENT +" WHERE id="+id+"", null );
-		return res;
+		Cursor cursor =  db.query(NOM_TABLE_INCIDENT, new String[] { COLUMN_INCIDENT_ID,
+						COLUMN_INCIDENT_DATE, COLUMN_INCIDENT_LATITUDE,COLUMN_INCIDENT_LONGITUDE,
+				COLUMN_INCIDENT_TITRE, COLUMN_INCIDENT_TYPE_ID}, COLUMN_INCIDENT_ID + "=?",
+				new String[] { String.valueOf(id) }, null, null, null, null);
+
+		if (cursor != null)
+			cursor.moveToFirst();
+
+		IncidentDB mLocalIncident = new IncidentDB();
+		mLocalIncident.setString("incident_id",cursor.getString(0));
+		mLocalIncident.setString("incident_date",cursor.getString(1));
+		mLocalIncident.setString("incident_latitude",cursor.getString(2));
+		mLocalIncident.setString("incident_longitude",cursor.getString(3));
+		mLocalIncident.setString("incident_titre",cursor.getString(4));
+		mLocalIncident.setString("incident_type_id",cursor.getString(5));
+
+		return mLocalIncident;
 	}
 
-	public int numberOfRows(){
+	public int getNumberOfRowsIncident(){
 		SQLiteDatabase db = this.getReadableDatabase();
 		int numRows = (int) DatabaseUtils.queryNumEntries(db, NOM_TABLE_INCIDENT);
 		return numRows;
 	}
-	public boolean updateIncident (Integer incident_id, String incident_date,String incident_name,
+	public boolean updateIncident (Integer incident_id, String incident_date,String incident_titre,
 								  String incident_longitude,String incident_latitude,
 								  String type_incident_id)
 	{
 		SQLiteDatabase db = this.getWritableDatabase();
 		ContentValues contentValues = new ContentValues();
 		contentValues.put("incident_date", incident_date);
-		contentValues.put("incident_name", incident_name);
+		contentValues.put("incident_titre", incident_titre);
 		contentValues.put("incident_longitude", incident_longitude);
 		contentValues.put("incident_latitude", incident_latitude);
 		contentValues.put("incident_type_id", type_incident_id);
@@ -103,15 +139,11 @@ public class DbHelper extends SQLiteOpenHelper{
 
 	public ArrayList<IncidentDB> getAllIncidents()
 	{
-		Log.v("===QUERY","SELECT * FROM "+ NOM_TABLE_INCIDENT);
 		ArrayList<IncidentDB> array_list = new ArrayList<IncidentDB>();
 		//hp = new HashMap();
 		SQLiteDatabase db = this.getReadableDatabase();
 		Cursor res = db.rawQuery( "SELECT * FROM "+ NOM_TABLE_INCIDENT, null );
 		res.moveToFirst();
-
-		Log.v("===RES", res.toString());
-
 
 		while(res.isAfterLast() == false){
 			IncidentDB incident_item = new IncidentDB();
@@ -138,7 +170,19 @@ public class DbHelper extends SQLiteOpenHelper{
 			array_list.add(incident_item);
 			res.moveToNext();
 		}
-		Log.v("===RAREY",String.valueOf(array_list.size()));
 		return array_list;
 	}
+/** EOF INCIDENT HELPERS*/
+
+/** HLOC HELPERS*/
+	/*
+	insertHloc(...){}
+	updateHloc(...){}
+	deleteHloc(...){}
+	getAllHloc(...){}
+	getHloc(...){}
+	getNumberOfRowsHloc(...){}
+	*/
+
+/** EOF HLOC HELPERS*/
 }

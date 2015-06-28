@@ -317,6 +317,7 @@
     <eat-comment/>
     <string name="title">Titre</string>
     <string name="title_activity_carte">Carte</string>
+    <string name="title_activity_detail">DetailActivity</string>
     <string name="title_activity_historique">Historique</string>
     <string name="title_activity_incident">Signaler un incident</string>
     <string name="title_activity_preferences">Préférences</string>

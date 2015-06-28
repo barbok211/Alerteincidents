@@ -15,5 +15,6 @@
     <string name="incident_type">Type d\'incident</string>
     <string name="titreIncident">Entrez un titre d\'incident</string>
     <string name="descIncident">Entrez une description d\'incident</string>
+    <string name="title_activity_detail">DetailActivity</string>
 
 </resources>

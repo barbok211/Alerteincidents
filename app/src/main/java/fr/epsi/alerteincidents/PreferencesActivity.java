@@ -34,7 +34,7 @@ public class PreferencesActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_preferences);
         //change le titre de l'activite
-        setTitle("Préférences");
+        setTitle("Preferences");
 
         RecyclerView rv = (RecyclerView)findViewById(R.id.RecyclerViewTypesIncidents);
         rv.setHasFixedSize(true);

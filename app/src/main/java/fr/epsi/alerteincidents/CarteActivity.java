@@ -1,20 +1,30 @@
 package fr.epsi.alerteincidents;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
@@ -42,48 +52,48 @@ public class CarteActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_carte);
 		if (!isGooglePlayServicesAvailable()) {
-			finish();
-		}		
-		//change le titre de l'activite
-		setTitle("Carte");
-		//recupere le map par son id
-		MapFragment mapFragment = (MapFragment) getFragmentManager()
-				.findFragmentById(R.id.map);	
-		map = mapFragment.getMap();
-		//affiche le point de notre position
-		map.setMyLocationEnabled(true);
-		//zoom sur notre position si gps active, sinon zoom sur France
-		mFusedLocation = new FusedLocationService(this);
-		Location location = mFusedLocation.getLocation();
-		marker2incident = new HashMap<Marker, IncidentDB>();
-		mLocalDatabase = new DbHelper(this);
+			setContentView(R.layout.layout_google_play_services_not_available);
+			alertbox("GooglePlayServices pas a jour !","Desole, pas de carte pour toi. Cliques sur \"Annuler\", puis \"Mettre a jour\".");
+		}
+		else {
+			setContentView(R.layout.activity_carte);
+			//change le titre de l'activite
+			setTitle("Carte");
+			//recupere le map par son id
+			final MapFragment mapFragment = (MapFragment) getFragmentManager()
+					.findFragmentById(R.id.map);
+			map = mapFragment.getMap();
+			//affiche le point de notre position
+			map.setMyLocationEnabled(true);
+			//zoom sur notre position si gps active, sinon zoom sur France
+			mFusedLocation = new FusedLocationService(this);
+			Location location = mFusedLocation.getLocation();
+			marker2incident = new HashMap<Marker, IncidentDB>();
+			mLocalDatabase = new DbHelper(this);
 
-		//ajout markers
-		addMarkersIncidents(mLocalDatabase);
+			//ajout markers
+			addMarkersIncidents(mLocalDatabase);
 
-		// est appele lorsqu'on clique sur la fenetre info
-		map.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
-			@Override
-			public void onInfoWindowClick(Marker marker) {
-				IncidentDB item = marker2incident.get(marker);
-				SharedPreferences prefs = getSharedPreferences("AlerteIncidents", Context.MODE_PRIVATE);
-				Editor edit = prefs.edit();
-				edit.putLong("item_id", item.getId());
-				edit.commit();
-				startDetailActivity();
+			// est appele lorsqu'on clique sur la fenetre info
+			map.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+				@Override
+				public void onInfoWindowClick(Marker marker) {
+					IncidentDB item = marker2incident.get(marker);
+					startDetailActivity(item.getString(DbHelper.COLUMN_INCIDENT_ID));
 
-			}
-		});
+				}
+			});
 
-		// Move the camera instantly with a zoom .
-		map.moveCamera(CameraUpdateFactory.newLatLngZoom(FRANCE, 5));
+			// Move the camera instantly with a zoom .
+			map.moveCamera(CameraUpdateFactory.newLatLngZoom(FRANCE, 5));
+		}
 
 	}
 
-	public void startDetailActivity(){
-		Intent i = new Intent(CarteActivity.this,MainActivity.class);
+	public void startDetailActivity(String item_id){
+		Intent i = new Intent(CarteActivity.this,DetailActivity.class);
+		i.putExtra("incident_id",item_id);
 		startActivity(i);
 		this.finish();
 	}
@@ -100,12 +110,32 @@ public class CarteActivity extends Activity {
 			Marker temp = map.addMarker(new MarkerOptions()
 							.position(latlng)
 							.title(item.getString(DbHelper.COLUMN_INCIDENT_TITRE))
-							.snippet(item.getString(DbHelper.COLUMN_INCIDENT_DATE))
+							.snippet("Date d'ajout : " + item.getString(DbHelper.COLUMN_INCIDENT_DATE))
 							.icon(BitmapDescriptorFactory.fromResource(R.drawable.map_marker))
 							.visible(true)
 			);
 			marker2incident.put(temp, item);
 		}
+	}
+
+	//get coordonates with adress
+	//@param : String adress
+	public LatLng getCoordonatesWithAdress(String adress){
+		double latitude = 0;
+		double longitude = 0;
+		Geocoder geocoder = new Geocoder(this, Locale.getDefault());
+		List<Address> addresses = null;
+		try {
+			addresses = geocoder.getFromLocationName(adress, 1);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		Address address = addresses.get(0);
+		if(addresses.size() > 0) {
+			latitude = addresses.get(0).getLatitude();
+			longitude = addresses.get(0).getLongitude();
+		}
+		return new LatLng(latitude,longitude);
 	}
 
 	private boolean isGooglePlayServicesAvailable() {
@@ -154,7 +184,7 @@ public class CarteActivity extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
+		getMenuInflater().inflate(R.menu.menu_carte, menu);
 		return true;
 	}
 
@@ -195,9 +225,66 @@ public class CarteActivity extends Activity {
 			this.finish();
 			return true;
 		}
+
+		if (id == R.id.addIncidentMap){
+			callAjoutDialog();
+		}
 		return super.onOptionsItemSelected(item);
 	}
 
+	protected void alertbox(String title, String mymessage)
+	{
+		new AlertDialog.Builder(this)
+				.setMessage(mymessage)
+				.setTitle(title)
+				.setCancelable(true)
+				.setNeutralButton("Annuler",
+						new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog, int whichButton){}
+						})
+				.show();
+	}
+
+	private void callAjoutDialog()
+	{
+		final Dialog myDialog = new Dialog(this);
+		myDialog.setContentView(R.layout.layout_ajout_incident_map);
+		myDialog.setCancelable(true);
+		myDialog.setCanceledOnTouchOutside(true);
+		myDialog.setTitle("Ajouter un incident en local");
+		Button mButtonAjouter = (Button) myDialog.findViewById(R.id.ajouter_button);
+		Button mButtonAnnuler = (Button) myDialog.findViewById(R.id.annuler_button);
+
+		//EditText mPassword = (EditText) myDialog.findViewById(R.id.id_carte);
+		//EditText mIdCarte = (EditText) myDialog.findViewById(R.id.password);
+
+		//affichage de la boite de dialogue
+		myDialog.show();
+
+		//ecouteur bouton ajouter
+		mButtonAjouter.setOnClickListener(
+				new View.OnClickListener() {
+					public void onClick(View view) {
+						EditText user_adress = (EditText) myDialog.findViewById(R.id.user_adress);
+
+						Log.v("===mAdress", user_adress.getText().toString());
+						//contient l'adresse saisie par l'utilisateur, a saisir dans la base
+						final String texte = user_adress.getText().toString();
+						//
+
+						myDialog.dismiss();
+						alertbox("Felicitation chiens enrages","Ajout effectue");
+					}
+				});
+
+		//ecouteur bouton annuler
+		mButtonAnnuler.setOnClickListener(
+				new View.OnClickListener() {
+					public void onClick(View view) {
+						myDialog.dismiss();
+					}
+				});
+	}
 	//set app title on actionBar
 	@Override
 	public void setTitle(CharSequence title) {
@@ -205,33 +292,4 @@ public class CarteActivity extends Activity {
 		getActionBar().setTitle(mTitle);
 	}
 
-	//add marker on map
-	private void addMarkerIncident(ArrayList<IncidentDB> mList)
-	{
-		Log.v("addMarkerIncident",String.valueOf(mList.size()));
-		List<IncidentDB> list_incident = mList;//liste des incidents
-		Iterator<IncidentDB> it = list_incident.iterator();
-
-		while (it.hasNext())
-		{
-			IncidentDB item = (IncidentDB) it.next();
-			//l'image du marker
-			int res = R.drawable.ic_launcher;
-			LatLng mLatlng = new LatLng(Double.valueOf(item.getString("latitude")),Double.valueOf(item.getString("longitude")));
-			String title = item.getString("titreIncident");
-
-			Marker temp = map.addMarker(new MarkerOptions()
-			//position en LatLng de l'infobulle	
-			.position(mLatlng)
-			//titre de l'infobulle
-			.title(title)
-			//description de l'infobulle
-			.snippet("Rebel")
-			.icon(BitmapDescriptorFactory.fromResource(res))
-			.visible(true)
-					);
-
-			marker2incident.put(temp, item);
-		}
-	}
 }

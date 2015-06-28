@@ -74,6 +74,10 @@
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="AIzaSyA0SaWBLW5ffO6KmpLokPtSSs3l4DnbuLQ" />
 
+        <activity
+            android:name="fr.epsi.alerteincidents.DetailActivity"
+            android:label="@string/title_activity_detail" >
+        </activity>
         <!-- Include the AdActivity and InAppPurchaseActivity configChanges and themes. -->
         <activity
             android:name="com.google.android.gms.ads.AdActivity"
