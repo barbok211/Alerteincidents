@@ -36,6 +36,22 @@ public class PreferencesActivity extends Activity {
         //change le titre de l'activite
         setTitle("Preferences");
 
+		CheckBox mInondationsCB = (CheckBox) findViewById(R.id.checkbox_inondations);
+		CheckBox mIncendiesCB = (CheckBox) findViewById(R.id.checkbox_incendies);
+
+		SharedPreferences sharedpreferences = getSharedPreferences("AlerteIncidents", Context.MODE_PRIVATE);
+		boolean inondationsCheck = sharedpreferences.getBoolean("inondations",false);
+		boolean incendiesCheck = sharedpreferences.getBoolean("incendies",false);
+
+		if(inondationsCheck){
+			mInondationsCB.setChecked(true);
+		}
+
+		if(incendiesCheck) {
+			mIncendiesCB.setChecked(true);
+		}
+
+		/*
         RecyclerView rv = (RecyclerView)findViewById(R.id.RecyclerViewTypesIncidents);
         rv.setHasFixedSize(true);
 
@@ -50,6 +66,40 @@ public class PreferencesActivity extends Activity {
 
         rv.setAdapter(new PreferencesAdapter(l));
         rv.setLayoutManager(new LinearLayoutManager(this));
+        */
+	}
+
+	public void onCheckboxClicked(View view) {
+		// Is the view now checked?
+		boolean checked = ((CheckBox) view).isChecked();
+
+		SharedPreferences sharedpreferences = getSharedPreferences("AlerteIncidents", Context.MODE_PRIVATE);
+		Editor editor = sharedpreferences.edit();
+
+		// Check which checkbox was clicked
+		switch(view.getId()) {
+			case R.id.checkbox_incendies:
+				if (checked){
+					editor.putBoolean("incendies",true);
+					Log.v("===PREFERENCES","INCENDIES CHECKED");
+				}
+				else{
+					editor.putBoolean("incendies",false);
+					Log.v("===PREFERENCES","INCENDIES NOTCHECKED");
+				}
+				break;
+			case R.id.checkbox_inondations:
+				if (checked){
+					editor.putBoolean("inondations",true);
+					Log.v("===PREFERENCES","INONDATIONS CHECKED");
+				}
+				else{
+					editor.putBoolean("inondations",false);
+					Log.v("===PREFERENCES","INONDATIONS NOTCHECKED");
+				}
+				break;
+		}
+		editor.commit();
 	}
 
 	//gestion bouton retour

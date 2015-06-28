@@ -1,7 +1,10 @@
 package fr.epsi.alerteincidents;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -47,7 +50,7 @@ public class CarteActivity extends Activity {
 	private FusedLocationService mFusedLocation;
 	private CharSequence mTitle;
 	private HashMap<Marker,IncidentDB> marker2incident;
-	private DbHelper mLocalDatabase;
+	private DbHelper mLocalDatabase = new DbHelper(this);
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -70,7 +73,6 @@ public class CarteActivity extends Activity {
 			mFusedLocation = new FusedLocationService(this);
 			Location location = mFusedLocation.getLocation();
 			marker2incident = new HashMap<Marker, IncidentDB>();
-			mLocalDatabase = new DbHelper(this);
 
 			//ajout markers
 			addMarkersIncidents(mLocalDatabase);
@@ -255,9 +257,6 @@ public class CarteActivity extends Activity {
 		Button mButtonAjouter = (Button) myDialog.findViewById(R.id.ajouter_button);
 		Button mButtonAnnuler = (Button) myDialog.findViewById(R.id.annuler_button);
 
-		//EditText mPassword = (EditText) myDialog.findViewById(R.id.id_carte);
-		//EditText mIdCarte = (EditText) myDialog.findViewById(R.id.password);
-
 		//affichage de la boite de dialogue
 		myDialog.show();
 
@@ -267,13 +266,36 @@ public class CarteActivity extends Activity {
 					public void onClick(View view) {
 						EditText user_adress = (EditText) myDialog.findViewById(R.id.user_adress);
 
-						Log.v("===mAdress", user_adress.getText().toString());
 						//contient l'adresse saisie par l'utilisateur, a saisir dans la base
-						final String texte = user_adress.getText().toString();
+						final String userAdress = user_adress.getText().toString();
 						//
 
 						myDialog.dismiss();
-						alertbox("Felicitation chiens enrages","Ajout effectue");
+						alertbox("Felicitation", "Ajout le l'adresse : \"" + userAdress + "\" effectue !");
+
+						LatLng userAdressLatLng = getCoordonatesWithAdress(userAdress);
+						Log.v("Latitude : "+String.valueOf(userAdressLatLng.latitude),
+								"Longitude "+String.valueOf(userAdressLatLng.longitude));
+						//DbHelper mLocalDatabase = new DbHelper(getApplicationContext());
+						//get current date
+						DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+						Date date = new Date();
+						//a recuperer depuis le formulaire d'ajout, pour l'instant le formulaire ne contient
+						//que la chaine d'adresse
+						//a faire aussi : latitude et longitude, ne peut pas les avoir si pas internet
+						String hloc_titre = "Titre incident local"; //titre de test, a recuperer
+						String hloc_longitude = String.valueOf(userAdressLatLng.longitude);
+						String hloc_latitude = String.valueOf(userAdressLatLng.latitude);
+						String hloc_type_id = "1"; //type id de test, a recuperer
+
+						mLocalDatabase.insertHloc(userAdress,date.toString(),hloc_titre,
+								hloc_longitude, hloc_latitude, hloc_type_id);
+
+						//Log.v("===CARTE", "Begin");
+						//IncidentDB mLocalIncident = mLocalDatabase.getHloc(1);
+						//Log.v("===CARTE","Success");
+						//String titreDeTest = mLocalIncident.getString("hloc_titre");
+						//Log.v("===CARTE ACTIVITY"," TITRE : "+titreDeTest);
 					}
 				});
 

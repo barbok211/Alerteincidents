@@ -25,7 +25,8 @@
             android:src="@drawable/btn_map" 
             android:layout_above="@+id/imageBtnHisto"
             android:layout_alignParentLeft="true"
-            android:onClick="newMap"/>
+            android:onClick="newMap"
+            />
 
         <ImageButton
             android:id="@+id/imageBtnIncident"

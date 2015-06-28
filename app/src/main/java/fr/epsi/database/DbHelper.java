@@ -21,7 +21,7 @@ public class DbHelper extends SQLiteOpenHelper{
 	//name of db
 	public static final String DATABASE_NAME = "DB_AI.db";
 	//version
-	public static int DATABASE_VERSION = 4;
+	public static int DATABASE_VERSION = 5;
 	// Database creation sql statement
 
 	// Columns Incident Table
@@ -33,13 +33,13 @@ public class DbHelper extends SQLiteOpenHelper{
 	public static final String COLUMN_INCIDENT_TYPE_ID = "incident_type_id";
 
 	// Columns Historique Local Table
-	public static final String COLUMN_HLOC_id = "hloc_id";
+	public static final String COLUMN_HLOC_ID = "hloc_id";
 	public static final String COLUMN_HLOC_ADRESSE = "hloc_adresse";
 	public static final String COLUMN_HLOC_DATE = "hloc_date";
 	public static final String COLUMN_HLOC_TITRE = "hloc_titre";
-	public static final String COLUMN_HLOC_LATTITUDE = "hloc_lattitude";
+	public static final String COLUMN_HLOC_LATITUDE = "hloc_latitude";
 	public static final String COLUMN_HLOC_LONGITUDE = "hloc_longitude";
-	public static final String COLUMN_HLOC_type_id = "hloc_type_id";
+	public static final String COLUMN_HLOC_TYPE_ID = "hloc_type_id";
 
 
 
@@ -55,22 +55,30 @@ public class DbHelper extends SQLiteOpenHelper{
 						+ "incident_id INTEGER PRIMARY KEY," + "incident_date TEXT,"
 						+ "incident_titre TEXT," + "incident_longitude TEXT,"
 						+ "incident_latitude TEXT," + " incident_type_id TEXT"
-						+ " );" +
+						+ " );"
+		);
 
-						"CREATE TABLE Hloc ("
+		database.execSQL(
+				"CREATE TABLE Hloc ("
 						+ "hloc_id INTEGER PRIMARY KEY," + "hloc_adresse TEXT," + "hloc_date TEXT,"
 						+ "hloc_titre TEXT," + "hloc_longitude TEXT,"
 						+ "hloc_latitude TEXT," + " hloc_type_id TEXT"
 						+ " );"
 		);
 
+
 	}
 	
 	//upgrade db
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-		db.execSQL("DROP TABLE IF EXISTS " + NOM_TABLE_INCIDENT+";" +
-						"DROP TABLE IF EXISTS " + NOM_TABLE_HLOC+";");
+		db.execSQL(
+				"DROP TABLE IF EXISTS " + NOM_TABLE_INCIDENT + ";"
+		);
+
+		db.execSQL(
+				"DROP TABLE IF EXISTS " + NOM_TABLE_HLOC + ";"
+		);
 		onCreate(db);
 	}
 
@@ -183,6 +191,68 @@ public class DbHelper extends SQLiteOpenHelper{
 	getHloc(...){}
 	getNumberOfRowsHloc(...){}
 	*/
+
+	public boolean insertHloc (String hloc_adresse,
+							   String hloc_date,
+							   String hloc_titre,
+							   String hloc_longitude,
+							   String hloc_latitude,
+							   String hloc_type_id)
+	{
+		SQLiteDatabase db = this.getWritableDatabase();
+		ContentValues contentValues = new ContentValues();
+		contentValues.put("hloc_adresse", hloc_adresse);
+		contentValues.put("hloc_date", hloc_date);
+		contentValues.put("hloc_titre", hloc_titre);
+		contentValues.put("hloc_longitude", hloc_longitude);
+		contentValues.put("hloc_latitude", hloc_latitude);
+		contentValues.put("hloc_type_id", hloc_type_id);
+		db.insert("Hloc", null, contentValues);
+		Log.v("===DBHELPER","INSERT HLOC");
+		return true;
+	}
+
+	public boolean updateHloc (Integer hloc_id,
+							   String hloc_adresse,
+							   String hloc_date,
+							   String hloc_titre,
+							   String hloc_longitude,
+							   String hloc_latitude,
+							   String hloc_type_id)
+	{
+		SQLiteDatabase db = this.getWritableDatabase();
+		ContentValues contentValues = new ContentValues();
+		contentValues.put("hloc_adresse", hloc_adresse);
+		contentValues.put("hloc_date", hloc_date);
+		contentValues.put("hloc_titre", hloc_titre);
+		contentValues.put("hloc_longitude", hloc_longitude);
+		contentValues.put("hloc_latitude", hloc_latitude);
+		contentValues.put("hloc_type_id", hloc_type_id);
+		db.update(NOM_TABLE_HLOC, contentValues, "id = ? ", new String[]{Integer.toString(hloc_id)});
+		return true;
+	}
+
+	public IncidentDB getHloc(int id){
+		SQLiteDatabase db = this.getReadableDatabase();
+		Cursor cursor =  db.query(NOM_TABLE_HLOC, new String[] { COLUMN_HLOC_ID,COLUMN_HLOC_ADRESSE,
+						COLUMN_HLOC_DATE, COLUMN_HLOC_LATITUDE,COLUMN_HLOC_LONGITUDE,
+						COLUMN_HLOC_TITRE, COLUMN_HLOC_TYPE_ID}, COLUMN_HLOC_ID + "=?",
+				new String[] { String.valueOf(id) }, null, null, null, null);
+
+		if (cursor != null)
+			cursor.moveToFirst();
+
+		IncidentDB mLocalIncident = new IncidentDB();
+		mLocalIncident.setString("hloc_id",cursor.getString(0));
+		mLocalIncident.setString("hloc_adresse",cursor.getString(1));
+		mLocalIncident.setString("hloc_date",cursor.getString(2));
+		mLocalIncident.setString("hloc_latitude",cursor.getString(3));
+		mLocalIncident.setString("hloc_longitude",cursor.getString(4));
+		mLocalIncident.setString("hloc_titre",cursor.getString(5));
+		mLocalIncident.setString("hloc_type_id",cursor.getString(6));
+
+		return mLocalIncident;
+	}
 
 /** EOF HLOC HELPERS*/
 }
