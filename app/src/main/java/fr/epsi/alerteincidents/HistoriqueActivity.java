@@ -31,12 +31,12 @@ public class HistoriqueActivity extends Activity {
         //change le titre de l'activite
         setTitle("Historique");
 
-        /*final ArrayAdapter typeIncidentAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item);
+        final ArrayAdapter typeIncidentAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item);
         RestAdapter restAdapter = new RestAdapter.Builder()
                 .setEndpoint(MainActivity.API_URL)
                 .build();
         RestApi methods = restAdapter.create(RestApi.class);
-        methods.getIncidentsByUser(Build.SERIAL);*/
+        methods.getIncidentsByUser(Build.SERIAL);
 	}
 
 	//gestion bouton retour

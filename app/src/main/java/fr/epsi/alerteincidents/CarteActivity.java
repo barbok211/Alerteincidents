@@ -72,6 +72,7 @@ public class CarteActivity extends Activity {
 			//zoom sur notre position si gps active, sinon zoom sur France
 			mFusedLocation = new FusedLocationService(this);
 			Location location = mFusedLocation.getLocation();
+
 			marker2incident = new HashMap<Marker, IncidentDB>();
 
 			//ajout markers
@@ -87,8 +88,19 @@ public class CarteActivity extends Activity {
 				}
 			});
 
+			//Log.v("===CARTE / Latitude : " + String.valueOf(location.getLatitude())
+			//		, "Longitude : " + String.valueOf(location.getLongitude()));
 			// Move the camera instantly with a zoom .
-			map.moveCamera(CameraUpdateFactory.newLatLngZoom(FRANCE, 5));
+			//if (!String.valueOf(location.getLatitude()).isEmpty() && !String.valueOf(location.getLongitude()).isEmpty()){
+			//	map.moveCamera(CameraUpdateFactory.newLatLngZoom(FRANCE, 8));
+			//}
+			//else {
+			//	map.moveCamera(CameraUpdateFactory.newLatLngZoom(FRANCE, 5));
+			//}
+
+			//MONTPEL
+			map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(43.6,3.8833),8));
+			//map.moveCamera(CameraUpdateFactory.newLatLngZoom(FRANCE, 8));
 		}
 
 	}
