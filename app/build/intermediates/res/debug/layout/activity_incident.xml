@@ -6,7 +6,8 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="fr.epsi.alerteincidents.IncidentActivity">
+    tools:context="fr.epsi.alerteincidents.IncidentActivity"
+    android:background="@drawable/fond_home2">
 
     <LinearLayout
         android:orientation="vertical"

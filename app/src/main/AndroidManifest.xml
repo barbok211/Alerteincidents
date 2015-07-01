@@ -22,7 +22,6 @@
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-
     <uses-permission
         android:name="android.permission.READ_EXTERNAL_STORAGE"
         android:maxSdkVersion="18" />
@@ -61,7 +60,8 @@
         </activity>
         <activity
             android:name=".HistoriqueActivity"
-            android:label="@string/title_activity_historique" >
+            android:label="@string/title_activity_historique"
+            android:windowSoftInputMode="adjustPan" >
         </activity>
 
         <meta-data

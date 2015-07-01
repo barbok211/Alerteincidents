@@ -7,14 +7,27 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
+
+import java.util.ArrayList;
 import java.util.List;
 
+import classes.metier.Incident;
+import classes.metier.IncidentDB;
 import classes.metier.TypeIncident;
+import fr.epsi.database.DbHelper;
 import fr.epsi.helper.RestApi;
 import retrofit.Callback;
 import retrofit.RestAdapter;
@@ -23,6 +36,9 @@ import retrofit.RetrofitError;
 public class HistoriqueActivity extends Activity {
 	// used to store app title
 	private CharSequence mTitle;
+	private RecyclerView mRecyclerView;
+	private RecyclerView.Adapter mAdapter;
+	private RecyclerView.LayoutManager mLayoutManager;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -31,12 +47,37 @@ public class HistoriqueActivity extends Activity {
         //change le titre de l'activite
         setTitle("Historique");
 
-        final ArrayAdapter typeIncidentAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item);
+        /*final ArrayAdapter typeIncidentAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item);
         RestAdapter restAdapter = new RestAdapter.Builder()
                 .setEndpoint(MainActivity.API_URL)
                 .build();
         RestApi methods = restAdapter.create(RestApi.class);
-        methods.getIncidentsByUser(Build.SERIAL);
+
+        List<Incident> mlist = methods.getIncidentsByUser(Build.SERIAL);
+*/
+
+		mRecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
+
+		// use this setting to improve performance if you know that changes
+		// in content do not change the layout size of the RecyclerView
+		mRecyclerView.setHasFixedSize(true);
+
+		// use a linear layout manager
+		mLayoutManager = new LinearLayoutManager(this);
+		mRecyclerView.setLayoutManager(mLayoutManager);
+
+		//recuperation de la liste des incidents locaux
+		DbHelper mLocalDatabase = new DbHelper(this);
+		ArrayList<IncidentDB> list_Incident = mLocalDatabase.getAllIncidents();
+		ArrayList<IncidentDB> myDataset = new ArrayList<>();
+
+		for (int i=0;i<list_Incident.size();i++){
+			IncidentDB item = list_Incident.get(i);
+			myDataset.add(i,item);
+		}
+
+		mAdapter = new HistoriqueAdapter(myDataset);
+		mRecyclerView.setAdapter(mAdapter);
 	}
 
 	//gestion bouton retour

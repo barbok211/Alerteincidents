@@ -234,25 +234,28 @@ public class DbHelper extends SQLiteOpenHelper{
 
 	public IncidentDB getHloc(int id){
 		SQLiteDatabase db = this.getReadableDatabase();
-		Cursor cursor =  db.query(NOM_TABLE_HLOC, new String[] { COLUMN_HLOC_ID,COLUMN_HLOC_ADRESSE,
-						COLUMN_HLOC_DATE, COLUMN_HLOC_LATITUDE,COLUMN_HLOC_LONGITUDE,
+		Cursor cursor =  db.query(NOM_TABLE_HLOC, new String[]{COLUMN_HLOC_ID, COLUMN_HLOC_ADRESSE,
+						COLUMN_HLOC_DATE, COLUMN_HLOC_LATITUDE, COLUMN_HLOC_LONGITUDE,
 						COLUMN_HLOC_TITRE, COLUMN_HLOC_TYPE_ID}, COLUMN_HLOC_ID + "=?",
-				new String[] { String.valueOf(id) }, null, null, null, null);
+				new String[]{String.valueOf(id)}, null, null, null, null);
 
 		if (cursor != null)
 			cursor.moveToFirst();
 
 		IncidentDB mLocalIncident = new IncidentDB();
-		mLocalIncident.setString("hloc_id",cursor.getString(0));
-		mLocalIncident.setString("hloc_adresse",cursor.getString(1));
-		mLocalIncident.setString("hloc_date",cursor.getString(2));
-		mLocalIncident.setString("hloc_latitude",cursor.getString(3));
-		mLocalIncident.setString("hloc_longitude",cursor.getString(4));
-		mLocalIncident.setString("hloc_titre",cursor.getString(5));
-		mLocalIncident.setString("hloc_type_id",cursor.getString(6));
+		mLocalIncident.setString("hloc_id", cursor.getString(0));
+		mLocalIncident.setString("hloc_adresse", cursor.getString(1));
+		mLocalIncident.setString("hloc_date", cursor.getString(2));
+		mLocalIncident.setString("hloc_latitude", cursor.getString(3));
+		mLocalIncident.setString("hloc_longitude", cursor.getString(4));
+		mLocalIncident.setString("hloc_titre", cursor.getString(5));
+		mLocalIncident.setString("hloc_type_id", cursor.getString(6));
 
 		return mLocalIncident;
 	}
 
 /** EOF HLOC HELPERS*/
+
+
+
 }

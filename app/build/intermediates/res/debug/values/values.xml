@@ -295,6 +295,7 @@
     <eat-comment/>
     <string name="descIncident">Entrez une description d\'incident</string>
     <string name="descriptionIncident">Description</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="hello_world">Hello world!</string>
     <string name="incident_type">Type d\'incident</string>
     <!-- From: file:/C:/Users/Sam%20Lau/StudioProjects/Alerteincidents/app/build/intermediates/exploded-aar/com.android.support/mediarouter-v7/22.0.0/res/values/values.xml -->
@@ -320,6 +321,7 @@
     <string name="title_activity_detail">DetailActivity</string>
     <string name="title_activity_historique">Historique</string>
     <string name="title_activity_incident">Signaler un incident</string>
+    <string name="title_activity_modification_historique">ModificationHistoriqueActivity</string>
     <string name="title_activity_preferences">Préférences</string>
     <string name="title_activity_profil">Profil</string>
     <string name="titreIncident">Entrez un titre d\'incident</string>

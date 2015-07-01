@@ -21,14 +21,12 @@ public class DetailActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
-        //setup detail_fragment
         Fragment detail_frag = new DetailFragment();
         fragment = detail_frag;
 
         //recuperation de l'id
         Intent i = getIntent();
         String incident_id = i.getStringExtra("incident_id");
-        Log.v("DETAIL ACTIVITY"," ID "+incident_id);
         Bundle args = new Bundle();
         args.putString("incident_id", incident_id);
         fragment.setArguments(args);

@@ -21,7 +21,7 @@ public class DetailFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        rootView = inflater.inflate(R.layout.detail_fragment, container, false);
+        rootView = inflater.inflate(R.layout.fragment_detail_info_map, container, false);
 
         Bundle args = this.getArguments();
         String incident_id = args.getString("incident_id");

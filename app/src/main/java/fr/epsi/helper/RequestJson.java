@@ -63,7 +63,7 @@ public class RequestJson {
 		if (callback == null && progressFunc != null)
 			callback = progressFunc;
 
-    	Log.v("initDB","load_state "+load_state);
+    	Log.v("initDB", "load_state " + load_state);
 		if (mProgress == 0 && load_state == NONE) 
 		{
 			//300 km

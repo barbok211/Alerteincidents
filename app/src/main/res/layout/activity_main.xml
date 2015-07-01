@@ -2,14 +2,16 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/fragment_container"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:background="@drawable/fond_home2">
 
-    <!-- Home wallpaper -->
+    <!-- Home wallpaper
     <ImageView
         android:id="@+id/imageView1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:src="@drawable/fond_home"/>
+        -->
     
 	<!-- Layout content home buttons -->
     <RelativeLayout
@@ -22,7 +24,7 @@
             android:id="@+id/imageBtnMap"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/btn_map" 
+            android:src="@drawable/carte"
             android:layout_above="@+id/imageBtnHisto"
             android:layout_alignParentLeft="true"
             android:onClick="newMap"
@@ -32,29 +34,29 @@
             android:id="@+id/imageBtnIncident"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/btn_incident" 
+            android:src="@drawable/alerter"
             android:layout_above="@+id/imageBtnPreference"
             android:layout_alignParentRight="true"
             android:onClick="newIncident"/>
-        
+
         <ImageButton
             android:id="@+id/imageBtnHisto"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/btn_histo" 
+            android:src="@drawable/historique"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
             android:onClick="newHistorique"/>
-        
+
         <ImageButton
             android:id="@+id/imageBtnPreference"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/btn_preference" 
+            android:src="@drawable/option"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
-            android:onClick="newPreference"/>                
-        
+            android:onClick="newPreference"/>
+
     </RelativeLayout>
 
 </FrameLayout>
