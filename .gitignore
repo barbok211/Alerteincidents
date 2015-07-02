@@ -71,3 +71,4 @@ proguard/
 # Log Files
 *.log
 Alerteincidents.iml
+.idea/workspace.xml
