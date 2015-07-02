@@ -89,8 +89,7 @@ public class IncidentActivity extends Activity {
                 if (titreIncident.getText().toString().equals("")) {
                     titreIncident.setError("Entrez un titre d'incident");
                 } else {
-                    if (lm.isProviderEnabled(GPS_PROVIDER) &&
-                            lm.isProviderEnabled(NETWORK_PROVIDER)) {
+                    if (lm.isProviderEnabled(GPS_PROVIDER)) {
 
                         Location mLastLocation = mFusedLocation.getLocation();
 
