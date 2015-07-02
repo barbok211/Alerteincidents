@@ -18,7 +18,7 @@ import fr.epsi.helper.VarsGlobals;
 public class SplashScreen extends Activity {
 	 
 	ProgressBar p_bar;
-    
+
     class ProgressCallback implements mCallback
     {
 		@Override
@@ -42,7 +42,7 @@ public class SplashScreen extends Activity {
         ActionBar actionBar = getActionBar();
         actionBar.hide();
         this.p_bar = (ProgressBar) this.findViewById(R.id.progressBar);
-        
+
         boolean chargerLaBase = false;
         
         SharedPreferences sharedpreferences = getSharedPreferences("AlerteIncidents", Context.MODE_PRIVATE);

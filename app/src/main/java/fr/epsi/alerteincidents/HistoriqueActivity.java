@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
@@ -32,6 +33,9 @@ import fr.epsi.helper.RestApi;
 import retrofit.Callback;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
+import retrofit.client.Response;
+
+import static fr.epsi.database.DbHelper.incidentsToIncidentsDB;
 
 public class HistoriqueActivity extends Activity {
 	// used to store app title
@@ -40,21 +44,14 @@ public class HistoriqueActivity extends Activity {
 	private RecyclerView.Adapter mAdapter;
 	private RecyclerView.LayoutManager mLayoutManager;
 
+    List<IncidentDB> list_Incident = new ArrayList<> ();
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_historique);
         //change le titre de l'activite
         setTitle("Historique");
-
-        /*final ArrayAdapter typeIncidentAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item);
-        RestAdapter restAdapter = new RestAdapter.Builder()
-                .setEndpoint(MainActivity.API_URL)
-                .build();
-        RestApi methods = restAdapter.create(RestApi.class);
-
-        List<Incident> mlist = methods.getIncidentsByUser(Build.SERIAL);
-*/
 
 		mRecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
 
@@ -68,7 +65,7 @@ public class HistoriqueActivity extends Activity {
 
 		//recuperation de la liste des incidents locaux
 		DbHelper mLocalDatabase = new DbHelper(this);
-		ArrayList<IncidentDB> list_Incident = mLocalDatabase.getAllIncidents();
+		//ArrayList<IncidentDB> list_Incident = mLocalDatabase.getAllIncidents();
 		ArrayList<IncidentDB> myDataset = new ArrayList<>();
 
 		for (int i=0;i<list_Incident.size();i++){
@@ -79,6 +76,7 @@ public class HistoriqueActivity extends Activity {
 		mAdapter = new HistoriqueAdapter(myDataset);
 		mRecyclerView.setAdapter(mAdapter);
 	}
+
 
 	//gestion bouton retour
 	public void onBackPressed(){

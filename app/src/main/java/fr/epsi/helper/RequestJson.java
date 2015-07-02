@@ -119,10 +119,14 @@ public class RequestJson {
 						Double latIncident = response.getJSONObject(i).getDouble("latitude");
 						Double lngIncident = response.getJSONObject(i).getDouble("longitude");
 						int idTypeIncident = response.getJSONObject(i).getInt("idTypeIncident");
+                        String descIncident = response.getJSONObject(i).getString("descriptionIncident");
+                        String userIncident = response.getJSONObject(i).getString("userIncident");
 
-						//insertion dans la db
+
+                        //insertion dans la db
 						mLocalDatabase.insertIncident(dateIncident,titreIncident,
-								lngIncident.toString(),latIncident.toString(),String.valueOf(idTypeIncident));
+								lngIncident.toString(),latIncident.toString(),String.valueOf(idTypeIncident),
+                                String.valueOf(descIncident), String.valueOf(userIncident));
 
 						incident_item.setString(DbHelper.COLUMN_INCIDENT_ID,
 								String.valueOf(idIncident));
@@ -136,6 +140,10 @@ public class RequestJson {
 								String.valueOf(lngIncident));
 						incident_item.setString(DbHelper.COLUMN_INCIDENT_TYPE_ID,
 								String.valueOf(idTypeIncident));
+                        incident_item.setString(DbHelper.COLUMN_INCIDENT_DESCRIPTION,
+                                String.valueOf(descIncident));
+                        incident_item.setString(DbHelper.COLUMN_INCIDENT_USER,
+                                String.valueOf(userIncident));
 
 						mListIncident.add(incident_item);
 					}
